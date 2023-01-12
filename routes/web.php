@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [ComicController::class, 'index'])->name('home');
+
 
 // per importare use App\Http\Controllers\ComicController; dare invio dopo aver scritto il nome del controller
 Route::resource('comics', ComicController::class);
