@@ -50,7 +50,12 @@ class ComicController extends Controller
      */
     public function show($id)
     {
-        //
+        // con il metodo findOrFail() posso evitare il controllo per l'abort(404) in quando se è null lancia la pagina 404
+        $comic_detail= Comic::findOrFail($id);
+
+        // dd($comic_detail);
+
+        return view('comics.show', compact('comic_detail'));
     }
 
     /**

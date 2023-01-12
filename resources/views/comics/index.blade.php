@@ -19,7 +19,9 @@
                 <td>{{$comic->id}}</td>
                 <td>{{$comic->title}}</td>
                 <td>{{$comic->price}}</td>
-                <td>@mdo</td>
+                <td>
+                    <a class="btn btn-primary" href="{{route('comics.show' , $comic)}}" title="show"><i class="fa-solid fa-eye"></i></a>
+                </td>
             </tr>
             @empty
                 <h3>Non ci sono risultati</h3>
