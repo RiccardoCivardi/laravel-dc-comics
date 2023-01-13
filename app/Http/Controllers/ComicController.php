@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ComicRequest;
 use App\Models\Comic;
 use Illuminate\Http\Request;
 
@@ -37,18 +38,42 @@ class ComicController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ComicRequest $request)
     {
         // validazione
-        $request->validate([
-            'title'=>'required|max:200|min:5',
-            'description'=>'max:1000',
-            'thumb'=>'required|max:255|min:10',
-            'price'=>'required|numeric|decimal:0,2',
-            'series'=>'required|max:100|min:5',
-            'sale_date'=>'required',
-            'type'=>'max:100'
-        ]);
+
+        // la request validate la metto nel file ComicRequest che creo con questo comando
+        // php artisan make:request ComicRequest
+        // poi la metto in store(...) e la importo
+
+
+        // $request->validate([
+        //     'title'=>'required|max:200|min:5',
+        //     'description'=>'max:1000',
+        //     'thumb'=>'required|max:255|min:10',
+        //     'price'=>'required|decimal:0,2',
+        //     'series'=>'required|max:100|min:5',
+        //     'sale_date'=>'required',
+        //     'type'=>'max:100'
+        // ],
+        // [
+        //     'title.required'=>'Il titolo è un campo obbligatorio',
+        //     'title.max'=>'Il titolo può essere lungo massimo :max caratteri',
+        //     'title.min'=>'Il titolo deve essere di almeno :min caratteri',
+        //     'description.max'=>'La decrizione può essere lunga massimo :max caratteri',
+        //     'thumb.required'=>'La URL dell\'immagine è un campo obbligatorio',
+        //     'thumb.max'=>'La URL dell\'immagine può essere lunga massimo :max caratteri',
+        //     'thumb.min'=>'La URL dell\'immagine deve essere di almeno :min caratteri',
+        //     'price.required'=>'Il prezzo è un campo obbligatorio',
+        //     'price.decimal'=>'Il prezzo può avere massimo 2 decimali',
+        //     'series.required'=>'La serie è un campo obbligatorio',
+        //     'series.max'=>'La serie può essere lunga massimo :max caratteri',
+        //     'series.min'=>'La serie deve essere di almeno :min caratteri',
+        //     'sale_date.required'=>'La data d\'usita è un campo obbligatorio con questo formato yyyy-mm-dd',
+        //     'type.max'=>'Il tipo può essere lungo massimo :max caratteri'
+        // ]);
+
+
         // per vedere cosa arriva dal create faccio il dump di $request ma i dati sono sporchi
         // dd($request);
         // per prenderli puliti utilizzarle il metodo all() e salvarli in una nuova variabile
@@ -117,7 +142,7 @@ class ComicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comic $comic)
+    public function update(ComicRequest $request, Comic $comic)
     {
         $form_data = $request->all();
         // dump($comic);
