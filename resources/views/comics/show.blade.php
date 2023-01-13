@@ -4,13 +4,15 @@
 
     <h1>DETTAGLIO FUMETTO</h1>
 
-    <h4>{{$comic_detail->id}}</h4>
-    <h3>{{$comic_detail->title}}</h3>
-    <h4>{{$comic_detail->price}}</h4>
-    <img src="{{$comic_detail->thumb}}" alt="{{$comic_detail->title}}">
-    <p>{{$comic_detail->description}}</p>
-    <h5>{{$comic_detail->series}}</h5>
-    <h5>{{$comic_detail->sale_date}}</h5>
+    <h4>{{$comic->id}}</h4>
+    <h3>{{$comic->title}}</h3>
+    <h4>{{$comic->price}}</h4>
+    <img src="{{$comic->thumb}}" alt="{{$comic->title}}">
+    <p>{{$comic->description}}</p>
+    <h5>{{$comic->series}}</h5>
+    <h5>{{$comic->sale_date}}</h5>
+
+    <a class="btn btn-primary" href="{{route('comics.index')}}">TORNA ALLA HOME</a>
 
 @endsection
 

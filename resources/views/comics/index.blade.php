@@ -4,6 +4,8 @@
 
     <h1>ELENCO FUMETTI</h1>
 
+    <a class="btn btn-success" href="{{route('comics.create')}}">Crea un nuovo fumetto</a>
+
     <table class="table">
         <thead>
             <tr>

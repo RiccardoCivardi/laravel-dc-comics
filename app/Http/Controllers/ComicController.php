@@ -14,7 +14,7 @@ class ComicController extends Controller
      */
     public function index()
     {
-        $comics = Comic::paginate(4);
+        $comics = Comic::orderBy('id','desc')->paginate(4);
 
         // dd($comics);
 
@@ -28,7 +28,7 @@ class ComicController extends Controller
      */
     public function create()
     {
-        //
+        return view('comics.create');
     }
 
     /**
@@ -39,7 +39,29 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // per vedere cosa arriva dal create faccio il dump di $request ma i dati sono sporchi
+        // dd($request);
+        // per prenderli puliti utilizzarle il metodo all() e salvarli in una nuova variabile
+        $form_data=$request->all();
+        // dd($form_data);
+        // dd($form_data['title']);
+
+        $new_comic= new Comic();
+        $new_comic->title=$form_data['title'];
+        $new_comic->slug=Comic::generateSlug($new_comic->title);
+        $new_comic->description=$form_data['description'];
+        $new_comic->thumb=$form_data['thumb'];
+        $new_comic->price=$form_data['price'];
+        $new_comic->series=$form_data['series'];
+        $new_comic->sale_date=$form_data['sale_date'];
+        $new_comic->type=$form_data['type'];
+
+        // dump($new_comic);
+
+        $new_comic->save();
+
+        // reindirizzo alla show dell'elemento appena salvato
+        return redirect()->route('comics.show', $new_comic);
     }
 
     /**
@@ -48,14 +70,15 @@ class ComicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Comic $comic)
     {
         // con il metodo findOrFail() posso evitare il controllo per l'abort(404) in quando se è null lancia la pagina 404
-        $comic_detail= Comic::findOrFail($id);
+        // volendo posso saltare questo passaggio scrivendo show(Comic $comic)
+        // $comic= Comic::findOrFail($id);
 
-        // dd($comic_detail);
+        // dd($comic);
 
-        return view('comics.show', compact('comic_detail'));
+        return view('comics.show', compact('comic'));
     }
 
     /**
