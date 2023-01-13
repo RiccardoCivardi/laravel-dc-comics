@@ -47,14 +47,20 @@ class ComicController extends Controller
         // dd($form_data['title']);
 
         $new_comic= new Comic();
-        $new_comic->title=$form_data['title'];
-        $new_comic->slug=Comic::generateSlug($new_comic->title);
-        $new_comic->description=$form_data['description'];
-        $new_comic->thumb=$form_data['thumb'];
-        $new_comic->price=$form_data['price'];
-        $new_comic->series=$form_data['series'];
-        $new_comic->sale_date=$form_data['sale_date'];
-        $new_comic->type=$form_data['type'];
+        // $new_comic->title=$form_data['title'];
+        // $new_comic->slug=Comic::generateSlug($new_comic->title);
+        // $new_comic->description=$form_data['description'];
+        // $new_comic->thumb=$form_data['thumb'];
+        // $new_comic->price=$form_data['price'];
+        // $new_comic->series=$form_data['series'];
+        // $new_comic->sale_date=$form_data['sale_date'];
+        // $new_comic->type=$form_data['type'];
+
+        // per fare il fill() aggiungo lo slug che va generato ai dati in ingresso $form_data che poi fillerò
+        $form_data['slug'] = Comic::generateSlug($form_data['title']);
+
+        // il metodo fill() prende ciò che arriva e lo assegna a ciò che ho messo nella variabile protetta $fillable nel Model
+        $new_comic->fill($form_data);
 
         // dump($new_comic);
 

@@ -23,6 +23,8 @@
                 <td>{{$comic->price}}</td>
                 <td>
                     <a class="btn btn-primary" href="{{route('comics.show' , $comic)}}" title="show"><i class="fa-solid fa-eye"></i></a>
+                    <a class="btn btn-warning" href="#" title="edit"><i class="fa-solid fa-pen"></i></a>
+                    <a class="btn btn-danger" href="#" title="trash"><i class="fa-regular fa-trash-can"></i></a>
                 </td>
             </tr>
             @empty

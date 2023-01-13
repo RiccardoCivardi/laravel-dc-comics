@@ -10,6 +10,9 @@ class Comic extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['title','slug','description','thumb','price','series','sale_date','type'];
+
+
     // funzione pubblica statica che genera lo slug, devo importare use Illuminate\Support\Str; in alto
 
     public static function generateSlug($string){
