@@ -39,6 +39,16 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
+        // validazione
+        $request->validate([
+            'title'=>'required|max:200|min:5',
+            'description'=>'max:1000',
+            'thumb'=>'required|max:255|min:10',
+            'price'=>'required|numeric|decimal:0,2',
+            'series'=>'required|max:100|min:5',
+            'sale_date'=>'required',
+            'type'=>'max:100'
+        ]);
         // per vedere cosa arriva dal create faccio il dump di $request ma i dati sono sporchi
         // dd($request);
         // per prenderli puliti utilizzarle il metodo all() e salvarli in una nuova variabile
@@ -131,8 +141,11 @@ class ComicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Comic $comic)
     {
-        //
+        $comic->delete();
+
+        //faccio il redirect a index passando in sessione l'eliminazione per mostrare l'alert
+        return redirect()->route('comics.index')->with('deleted', "Il fumetto $comic->title è stato eliminato correttamente");
     }
 }

@@ -4,6 +4,15 @@
 
     <h1>MODIFICA FUMETTO</h1>
 
+    {{-- <form action="{{route('comics.destroy', $comic)}}" method="POST" class="d-inline"
+        onsubmit="return confirm('Confermi l\'eliminazione di {{$comic->title}}')">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-danger" title="trash"><i class="fa-regular fa-trash-can"></i></button>
+    </form> --}}
+
+    @include('partials.form-delete', ['title'=>$comic->title, 'id'=>$comic->id])
+
     {{-- Il form punta ad update e usa il metodo POST ma devo aggiungere il comando blade @methods('PUT') --}}
     <form action="{{route('comics.update', $comic)}}" method="POST">
         <!-- Token per il form, lo vedo nell'inspector nell html -->
